@@ -2,15 +2,25 @@
 
 
 Instructions on how to use this system
+
 1. Download and unzip all files in “Codes” section.
+
 2. Put the Emotiv device on your head and turn it on.
+
 3. Run GUI at: GUI_OpenGl\ by compiling Stimulator_opengl.cpp
+
 4. In BCI2000 package: run batch\FieldTripBuffer_Emotiv.bat with parameters: parms\Emotive_parameteres.prm
+
 5. Turn on your Bluetooth device** and run Android app on it
+
 6. Run Digital_Signal_Processing_MATLAB\onlinify.m (set “Bluetooth_enable” flag variable to 1, if you are connecting to your Bluetooth device for the first time)
 
+
 * You should have installed MATLAB, “Emotiv EEG 14 channels” device’s driver prior to use this system.
+
 ** Bluetooth device means the device you are using to be connected to MATLAB via Bluetooth and call the phone number processed and acquired by MATLAB.
+
+
 
 
 Introduction
