@@ -1,0 +1,116 @@
+glFont
+Copyright (c) 1998 Brad Fish
+E-mail: bhf5@email.byu.edu
+Web: http://students.cs.byu.edu/~bfish/
+
+C++ port of glFont API
+Copyright (c) 2002 Henri Kyrki
+E-mail: hkyrki@yahoo.com
+
+Introduction
+============
+Thanks for downloading glFont!
+
+glFont is a Win32 program that creates a texture containing a range of
+characters in a specified font, and automatically generates texture coordinates
+for use in OpenGL applications that need to display text.  The font type is not
+limited to monospaced fonts; each character is displayed with correct spacing
+and size.
+
+Text is rendered by texture mapping specific characters onto OpenGL quads.  It
+is quite possible and easy to modify the color, size, position of the text
+quads using standard OpenGL functions.  It is also quite possible to load as
+many different fonts as you wish, and use them whenever you please.
+
+
+Main changes in C++ port
+===================
+- Arranged code into three classes, GLFontBase, GLFont and PixelPerfectGLFont.
+  Users should only use GLFont and PixelPerfectGLFont.
+- Added built-in support for pixel-perfect font rendering.
+- Changed error handling to use expections instead of return codes.
+
+Sample C++ Code
+===============
+
+(window must be initialized before this):
+
+	//Initialize OpenGL
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	//Initialize the viewport
+	glViewport(0, 0, 640, 480);
+
+	//Initialize OpenGL projection matrix
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0f, 640.0f, 480.0f, 0.0f, -2.0f, 2.0f);
+
+	//Clear back buffer
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	//Create font
+	GLuint textureName;
+	glGenTextures(1, &textureName);
+	PixelPerfectGLFont font;
+	try {
+		font.Create("fonts/quad20.glf", textureName);
+	}
+	catch(GLFontError::InvalidFile) {
+		cerr << "Cannot load font\n";
+		abort();
+	}
+
+	//Draw some stuff
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity( );
+	glEnable(GL_TEXTURE_2D);
+	glColor3f(1.0f, 0.0f, 0.0f);
+
+	try {
+		font.Begin();
+		font.TextOut("hello world", 50, 50, 0);;
+	}
+	catch(GLFontError::InvalidFont) {
+		cerr << "Trying to draw with an uninitialized font\n";
+		abort();
+	}
+	glDisable(GL_TEXTURE_2D);
+	glLoadIdentity();
+
+Files You Should Have Received
+==============================
+The following files should be contained in the ZIP you downloaded.  If not,
+ please contact me, and let me know where you downloaded it from.
+
+1.  glFont.exe -- the glFont builder
+2.  glFont.h -- the header for the glFont API
+3.  glFont.c -- the source for the glFont API
+4.  glFont.txt -- the file you are now reading
+
+Distribution
+============
+You may distribute glFont as long as it is the original, unmodified ZIP,
+ available from my web site, containing the files above.
+
+The newest version of glFont will always be available at the following URL:
+http://students.cs.byu.edu/~bfish/glfont.php
+
+Terms of Use
+============
+You may use the source to the glFont API in any program you wish, commercial and
+non-commercial, as long as credit is given to myself (in the accompanying
+program documentation, or in the program itself), including my e-mail address
+and a link to my web page.  You may modify the source to fit your specific
+needs if wish, but the same terms apply--you must provide original credit to
+myself.
+
+The source to the glFont builder is available for purchase; contact me if you
+are interested.
+
+Thanks for using glFont!
+
+Brad Fish
+Henri Kyrki
