@@ -1,4 +1,4 @@
-# Brain-Computer-Interface-BCI-based-Phone-Dialing
+# Brain Computer Interface (BCI) based on Steady State Visual Evoked Potential (SSVEP)
 
 
 Instructions on how to use this system
